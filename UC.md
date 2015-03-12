@@ -1,69 +1,76 @@
-# (UC)(http://naotu.baidu.com/viewshare.html?shareId=au1mgrpq9bsw)
+[TOC]
+## UC³£ÓÃÀà
+* CiscoCDR
+* FileCollectionParam: Êý¾Ý´¦Àí»º³åÀà£¬°ü¹üÒ»¸ö½«xmlÊý¾Ý½âÎöµ½¶ÔÏó£¨FileCollectConfig£©µÄ¹ý³Ì
+* LocalFileOperator: ±¾µØÎÄ¼þ²Ù×÷Àà
+* FileAnalyseParam: Êý¾Ý·ÖÎö´¦Àí»º³åÀà£¬°ü¹üÒ»¸ö½«xmlÊý¾Ý½âÎöµ½¶ÔÏó£¨FileAnalyseConfig£©µÄ¹ý³Ì
+* CDROriginal: Ô­Ê¼Êý¾ÝÊµÌåÀà
+---
+* **OrigiCdrFileParser**£ºCDR»°µ¥ÎÄ¼þ·ÖÎöÀà
+* **CmrFileParser**: CMR¼ÇÂ¼·ÖÎöÀà
+* SpecallService: Ô­Ê¼»°µ¥·ÖÎö´¦Àí·þÎñ
+* CdrRecorderParser: Ê¶±ð²¢·ÖÀà´¦Àí
+* CdrValidationManager: CDRÎÄ¼þÐ£Ñé¹ÜÀíÀà
+* BaseCdrFieldValidator: »°µ¥×Ö¶ÎÓÐÐ§ÐÔÐ£Ñé»ùÀà
+* NormalBuffer: »º³å¹ÜÀíÀà
+* CdrFieldConfigParser: CDR×Ö¶ÎÅäÖÃÀà
+* AppResultCountManage: ²É¼¯Ïß³Ì´¦Àí½á¹ûÍ¬²½¼ÆÊýÆ÷
+## UC»°µ¥×Ö¶Î·ÖÎö
+CallingNumber£ºÖ÷½ÐºÅÂë
 
-## ServiceManageListenerï¼ˆç³»ç»Ÿé…ç½®ç›‘å¬å™¨ï¼‰
+## »°µ¥·ÖÎö´¦Àí
+### CdrRecorderParser.flow() // Ê¶±ð²¢·ÖÀà´¦Àí»°µ¥µÄÈë¿Ú·½·¨
+* MissCall: ´¦ÀíÎ´½ÓÀ´µç»°µ¥
+* Ignore: ´¦ÀíºöÂÔÀàÐÍµÄ»°µ¥
+* Split: ´¦ÀíÐèÒª²ð·ÖµÄ»°µ¥
+* MergerSign: ´¦ÀíÐèÒªºÏ²¢µÄ»°µ¥
+* Common: ´¦ÀíÆÕÍ¨µÄ»°µ¥
 
-### è®¡è´¹ç³»ç»Ÿ
+### MergerService // Ê¶±ð²¢ºÏ²¢
+* MeetingJion.mergerMeeting(); //ºÏ²¢Jion Meeting»°µ¥
+  CdrRecorderSaver.saveResult(); //±£´æÊý¾Ýµ½CDR±í
+  CDROriginalService.saveResult(); //±ê¼ÇÒÑ´¦ÀíµÄ»°µ¥
+* Meeting.mergerMeeting(); //ºÏ²¢Meeting»°µ¥
+* Transferred.mergerTransferred(); //ºÏ²¢ºô½Ð×ªÒÆ(Transferred)»°µ¥
+* Replaces.mergerReplaces(); //ºÏ²¢(Replaces)»°µ¥
+  CdrRecorderSaver.saveResult(); //±£´æÊý¾Ýµ½CDR±í
+  CDROriginalService.saveResult(); //±ê¼ÇÒÑ´¦ÀíµÄ»°µ¥
 
-#### CollectiontAppï¼ˆè¯å•é‡‡é›†æœåŠ¡ï¼‰
+### UC×Ö¶ÎÓëCall ManagerÊý¾Ý¿â×Ö¶Î½âÎö
+* configParam.getField(int j).getUCFieldName(); // CDR»°µ¥ÖÐµÄ×Ö¶Î
+* configParam.getField(int j).getCMFieldName(); // CMÊý¾Ý¿â×Ö¶Î
+* configParam.getField(j).getCMIndex(); // ×Ö¶ÎË÷ÒýIndex
 
-#### SpecallServiceï¼ˆåŽŸå§‹è¯å•åˆ†æžå¤„ç†æœåŠ¡ï¼‰
+### Êý¾Ý¿â±íËµÃ÷
+* COLLECTIONLOG: »°µ¥²É¼¯ÈÕÖ¾¼ÇÂ¼´¦Àí
 
-#### AccountServiceï¼ˆæ–°è§„åˆ™æ‰¹ä»·æœåŠ¡ï¼‰
+### Íø¹Ø·ÖÎö
 
-#### Traficcï¼ˆè¯å•æµç¨‹åˆ†æžæœåŠ¡ï¼‰
+#### ¸ù¾ÝÍø¹ØID»ñÈ¡ÔËÓªÉÌÐÅÏ¢
+`*GatewayCache.getSystemProviderByGetewayID*`
+* µçÐÅ£º133,153,180,189,10000,114
+* ÒÆ¶¯£º134,135,136,137,138,139,147,150,151,152,157,158,159,182,183,187,188,10086,12580,12590
+* ÁªÍ¨£º130,131,132,155,156,185,186,10011,10010
+* ÆäËû£º*
 
-#### NewMissCallThreadï¼ˆæœªæŽ¥æ¥ç”µæœåŠ¡ï¼‰
+#### ¸ù¾ÝÍø¹ØID»ñÈ¡²¦ºÅ¼Æ»®ÐÅÏ¢
+`*GatewayCache.getCdrDialplanByGetewayID*`
+![](/img/cdr_dialplan.png)
 
-#### CloudCallForwardSearchThreadï¼ˆå‘¼å«è½¬ç§»æœç´¢æœåŠ¡ï¼‰
+#### ¸ù¾ÝÍø¹ØID»ñÈ¡·ÑÂÊÏî
+`*GatewayCache.getRateItemsInfoByGetewayID*`
+GatewayRateitem->RateItem
+![](/img/rate_items.png)
 
-#### CloudCallForwardSetThreadï¼ˆå‘¼å«è½¬ç§»è®¾ç½®æœåŠ¡ï¼‰
+#### ¸ù¾ÝÍø¹ØID»ñÈ¡ÌØÊâºÅÂë
+`*getCdrFilternumByGetewayID*`
+GatewayFilternum(GatewayFilternum)->CdrFilternum
 
-### VOIPç³»ç»Ÿ
-
-#### CollectionAppï¼ˆé‡‡é›†åˆ†æžï¼‰
-
-#### VoipAccountServiceï¼ˆæ‰¹ä»·ï¼‰
-
-### åŽå°æœåŠ¡
-
-#### é‚®ä»¶å‘Šè­¦
-
-##### MailAlertï¼ˆç³»ç»Ÿå‘Šè­¦ï¼‰
-
-##### CDRCollectionAlertï¼ˆè¯å•é‡‡é›†å‘Šè­¦ï¼‰
-
-#### SendReportï¼ˆæŠ¥è¡¨åˆ†å‘ï¼‰
-
-#### DBClearï¼ˆæ•°æ®åº“æ¸…ç†åŽå°æœåŠ¡çº¿ç¨‹ï¼‰
-
-### Voizmateå¢žå€¼åº”ç”¨ç³»ç»Ÿ
-
-#### TerminalObserverImplï¼ˆè®¾å¤‡å¯¹è±¡è§‚å¯Ÿè€…ï¼‰
-
-#### CallObserverImplï¼ˆå‘¼å«æŽ§åˆ¶è§‚å¯Ÿè€…ï¼‰
-
-#### ScheduleManagerï¼ˆé‚®ä»¶æ”¶å–è°ƒåº¦çº¿ç¨‹,ç”¨æ¥æŽ§åˆ¶æ”¶å–é‚®ä»¶çš„ä»»åŠ¡åˆ†é…å’Œé¢‘çŽ‡ï¼‰
-
-#### AlarmPushï¼ˆä¸ªäººæé†’æœåŠ¡ï¼‰
-
-#### NotifyPushï¼ˆé€šçŸ¥æœåŠ¡ï¼‰
-
-#### GoogleCalendarï¼ˆè°·æ­Œé€šçŸ¥æœåŠ¡ï¼‰
-
-#### SmsAlertServiceï¼ˆçŸ­ä¿¡åé¦ˆæœåŠ¡ï¼‰
-
-### DBæœåŠ¡
-
-#### DBBackupï¼ˆæ•°æ®åº“ç®¡ç†æœåŠ¡ï¼‰
-
-### LicenseæœåŠ¡
-
-#### CheckLicenseServiceï¼ˆlicenseæ£€æŸ¥æœåŠ¡çº¿ç¨‹ï¼‰
-
-### æ—¥å¿—æœåŠ¡
-
-#### UClogsServiceï¼ˆUCæ—¥å¿—æœåŠ¡ï¼‰
-
-### LDAPæœåŠ¡
-
-#### LdapSynchronizeï¼ˆLDAPæœåŠ¡ï¼‰
+#### ¸ù¾ÝÍø¹ØID»ñÈ¡IP²¦ºÅÇ°×º
+`*getIpPreNumbersByGetewayID*`
+GatewayIpPreNum(Íø¹ØºÍÌØÊâÇ°×º¹ØÏµÀà)->IpPreNumber
+```
+17911
+17951
+17909
+```
